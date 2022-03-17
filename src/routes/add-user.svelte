@@ -7,13 +7,13 @@
     'Pracownik administracyjny'
   ]
 
-  let name = 'c'
-  let surname = 'v'
-  let email = 'cv@vc.pl'
-  let password = 'vcx'
+  let name = ''
+  let surname = ''
+  let email = ''
+  let password = ''
   let userType = ''
-  let phone = '000000000'
-  let education = 'high as f*'
+  let phone = ''
+  let education = ''
 
   let correspondenceAddress = {
     voivodship: '', 
