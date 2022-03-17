@@ -17,6 +17,9 @@
   "dependencies": {
     "@fontsource/fira-mono": "^4.5.0",
     "@lukeed/uuid": "^2.0.0",
-    "cookie": "^0.4.1"
+    "bcryptjs": "^2.4.3",
+    "cookie": "^0.4.1",
+    "dotenv": "^16.0.0",
+    "mongodb": "^4.4.1"
   }
 }

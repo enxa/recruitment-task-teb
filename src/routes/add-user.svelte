@@ -1,19 +1,19 @@
 <script>
   import { usersStore } from './users-store.js'
 
-  let validationError = null
+  let info = null
   let userTypes = [
     'Wykładowca',
     'Pracownik administracyjny'
   ]
 
-  let name = 'c'
-  let surname = 'v'
-  let email = 'cv@vc.pl'
-  let password = 'vcx'
+  let name = ''
+  let surname = ''
+  let email = ''
+  let password = ''
   let userType = ''
-  let phone = '000000000'
-  let education = 'high as f*'
+  let phone = ''
+  let education = ''
 
   let correspondenceAddress = {
     voivodship: '', 
@@ -57,7 +57,6 @@
 
     if (user !== {}) {
       post(user) 
-      resetForm() 
     }
   }
 
@@ -71,8 +70,14 @@
       body: JSON.stringify(data),
     })
     let result = await response.json()
+    console.log('result', result)
+    if (result.auth) {
+      info = result.auth
+    } else {
+      usersStore.update(store => store = [result, ...store])
+      resetForm()
+    }
 
-    usersStore.update(store => store = [result, ...store])
   }
 
   let resetForm = e => {
@@ -169,4 +174,5 @@
   <input type="submit" value="Dodaj użytkownika">
 </form>
 
-{$usersStore}
+{info}
+{JSON.stringify($usersStore)}
