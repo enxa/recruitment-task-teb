@@ -1,7 +1,7 @@
 <script>
   import { usersStore } from './users-store.js'
 
-  let validationError = null
+  let info = null
   let userTypes = [
     'Wykładowca',
     'Pracownik administracyjny'
@@ -57,7 +57,6 @@
 
     if (user !== {}) {
       post(user) 
-      resetForm() 
     }
   }
 
@@ -71,8 +70,14 @@
       body: JSON.stringify(data),
     })
     let result = await response.json()
+    console.log('result', result)
+    if (result.auth) {
+      info = result.auth
+    } else {
+      usersStore.update(store => store = [result, ...store])
+      resetForm()
+    }
 
-    usersStore.update(store => store = [result, ...store])
   }
 
   let resetForm = e => {
@@ -169,4 +174,5 @@
   <input type="submit" value="Dodaj użytkownika">
 </form>
 
-{$usersStore}
+{info}
+{JSON.stringify($usersStore)}
