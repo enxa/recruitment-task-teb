@@ -35,8 +35,10 @@
   }
 
   let handleWheel = e => {
-    if (e.deltaY >= 0) ++skip <= 0 ? skip = 0 : skip
-    loadMore(skip, limit, sortType, valueToSort, textToSearch)
+    if (e.deltaY >= 0) {
+      ++skip <= 0 ? skip = 0 : skip
+      loadMore(skip, limit, sortType, valueToSort, textToSearch)
+    }
   }
 
   let changeSort = (changeSkip, changeLimit, changeSortType, changeValueToSort) => {
