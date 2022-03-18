@@ -2,7 +2,7 @@
   import { usersStore } from './users-store.js'
   import { goto } from '$app/navigation'
 
-  let info = null
+  let error = null
   let userTypes = [
     'Wykładowca',
     'Pracownik administracyjny'
@@ -58,32 +58,35 @@
 
   let handleSubmit = e => {
     let user = {}
-    if (userType === 'Wykładowca') {
-      user = {
-        name,
-        surname,
-        email,
-        password,
-        userType,
-        phone,
-        education
+    if (name == '' || surname == '' || email == '' || password == '' || userType == '') {
+      error = 'Uzupełnij *wymagane pola'
+    } else {
+      error = false
+      if (userType === 'Wykładowca') {
+        user = {
+          name,
+          surname,
+          email,
+          password,
+          userType,
+          phone,
+          education
+        }
       }
-    }
-    if (userType === 'Pracownik administracyjny') {
-      user = {
-        name,
-        surname,
-        email,
-        password,
-        userType,
-        correspondenceAddress,
-        residenceAddress
+      if (userType === 'Pracownik administracyjny') {
+        user = {
+          name,
+          surname,
+          email,
+          password,
+          userType,
+          correspondenceAddress,
+          residenceAddress
+        }
       }
     }
 
-    if (user !== {}) {
-      post(user) 
-    }
+    if (error === false && user !== {}) post(user)
   }
 
   let post = async data => {
@@ -108,19 +111,19 @@
 </script>
 
 <form class="add-user" on:submit|preventDefault={handleSubmit}>
-  <label><div>Imię</div>
+  <label><div>Imię *</div>
     <input type="text" bind:value={name}>
   </label>
-  <label><div>Nazwisko</div>
+  <label><div>Nazwisko *</div>
     <input type="text" bind:value={surname}>
   </label>
-  <label><div>Email</div>
+  <label><div>Email *</div>
     <input type="email" bind:value={email}>
   </label>
-  <label><div>Password</div>
+  <label><div>Hasło *</div>
     <input type="password" bind:value={password}>
   </label>
-  <label><div>Typ użytkownika</div>
+  <label><div>Typ użytkownika *</div>
     <select bind:value={userType}>
       {#each userTypes as userType}
         <option value={userType}>{userType}</option>
@@ -175,9 +178,9 @@
   <input type="submit" value="Dodaj użytkownika">
 </form>
 
-<div class="info">
-  {#if info}
-    {info}
+<div class="error">
+  {#if error}
+    {error}
   {/if}
 </div>
 
