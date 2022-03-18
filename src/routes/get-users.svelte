@@ -48,15 +48,15 @@
     loadMore(skip, limit, sortType, valueToSort, textToSearch)
   }
 
-	let searchText = (changeTextToSearch) => {
-		clearTimeout(debounceTimer)
-		debounceTimer = setTimeout(() => {
+  let searchText = (changeTextToSearch) => {
+    clearTimeout(debounceTimer)
+    debounceTimer = setTimeout(() => {
       skip = 0
-			textToSearch = changeTextToSearch
+      textToSearch = changeTextToSearch
       usersStore.set([])
       changeSort(skip, limit, sortType, valueToSort, textToSearch)
-		}, 500)
-	}
+    }, 500)
+  }
   
   onMount(() => {
     usersStore.set([])
