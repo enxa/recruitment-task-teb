@@ -10,10 +10,10 @@
   let query = new URLSearchParams()
 
   let skip = 0
-  let limit = 5
+  let limit = 10
   let sortType = 1
   let valueToSort = 'surname'
-  let textToSearch = 'c'
+  let textToSearch = ''
   let debounceTimer
   
   let loadMore = async (skip, limit, sortType, valueToSort, textToSearch) => {
@@ -75,33 +75,33 @@
 
 {#if nameAscendingOrder}
   <button 
-    on:click={() => { changeSort(0, 5, -1, 'name'); nameAscendingOrder = false; nameSortActiveLabel = true; surnameSortActiveLabel = false }} 
+    on:click={() => { changeSort(0, 10, -1, 'name'); nameAscendingOrder = false; nameSortActiveLabel = true; surnameSortActiveLabel = false }} 
     class={nameSortActiveLabel ? 'active': ''}
   >▲ Sortuj po imieniu rosnąco</button>
 {/if}
 {#if !nameAscendingOrder}
   <button 
-    on:click={() => { changeSort(0, 5, 1, 'name'); nameAscendingOrder = true; nameSortActiveLabel = true; surnameSortActiveLabel = false }} 
+    on:click={() => { changeSort(0, 10, 1, 'name'); nameAscendingOrder = true; nameSortActiveLabel = true; surnameSortActiveLabel = false }} 
     class={nameSortActiveLabel ? 'active': ''}
   >▼ Sortuj po imieniu malejąco</button>
 {/if}
 
 {#if surnameAscendingOrder}
   <button 
-    on:click={() => { changeSort(0, 5, -1, 'surname'); surnameAscendingOrder = false; nameSortActiveLabel = false; surnameSortActiveLabel = true }} 
+    on:click={() => { changeSort(0, 10, -1, 'surname'); surnameAscendingOrder = false; nameSortActiveLabel = false; surnameSortActiveLabel = true }} 
     class={surnameSortActiveLabel ? 'active': ''}
   >▲ Sortuj po nazwisku rosnąco</button>
 {/if}
 {#if !surnameAscendingOrder}
   <button 
-    on:click={() => { changeSort(0, 5, 1, 'surname'); surnameAscendingOrder = true; nameSortActiveLabel = false; surnameSortActiveLabel = true }} 
+    on:click={() => { changeSort(0, 10, 1, 'surname'); surnameAscendingOrder = true; nameSortActiveLabel = false; surnameSortActiveLabel = true }} 
     class={surnameSortActiveLabel ? 'active': ''}
   >▼ Sortuj po nazwisku malejąco</button>
 {/if}
 
-{#each $usersStore as user}
+{#each $usersStore as user, i}
   <div>
-    {JSON.stringify(user)}
+    {++i}: {JSON.stringify(user)}
   </div>
 {/each}
 

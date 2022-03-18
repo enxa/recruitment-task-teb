@@ -1,5 +1,6 @@
 <script>
   import { usersStore } from './users-store.js'
+  import { goto } from '$app/navigation'
 
   let info = null
   let userTypes = [
@@ -28,6 +29,32 @@
     code: '', 
     street: '', 
     number: '' 
+  }
+
+  
+  let resetForm = e => {
+    name = ''
+    surname = ''
+    email = ''
+    password = ''
+    userType = ''
+    phone = ''
+    education = ''
+
+    correspondenceAddress = {
+      voivodship: '', 
+      city: '', 
+      code: '', 
+      street: '', 
+      number: '' 
+    }
+    residenceAddress = {
+      voivodship: '', 
+      city: '', 
+      code: '', 
+      street: '', 
+      number: '' 
+    }
   }
 
   let handleSubmit = e => {
@@ -61,6 +88,7 @@
   }
 
   let post = async data => {
+    goto('get-users')
     let response = await fetch(`./add-user`, {
       method: 'POST',
       headers: {
@@ -76,32 +104,6 @@
     } else {
       usersStore.update(store => store = [result, ...store])
       resetForm()
-    }
-
-  }
-
-  let resetForm = e => {
-    name = ''
-    surname = ''
-    email = ''
-    password = ''
-    userType = ''
-    phone = ''
-    education = ''
-
-    correspondenceAddress = {
-      voivodship: '', 
-      city: '', 
-      code: '', 
-      street: '', 
-      number: '' 
-    }
-    residenceAddress = {
-      voivodship: '', 
-      city: '', 
-      code: '', 
-      street: '', 
-      number: '' 
     }
   }
 </script>
