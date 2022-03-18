@@ -53,7 +53,6 @@
 		debounceTimer = setTimeout(() => {
       skip = 0
 			textToSearch = changeTextToSearch
-      console.log('textToSearch', textToSearch)
       usersStore.set([])
       changeSort(skip, limit, sortType, valueToSort, textToSearch)
 		}, 500)
@@ -68,49 +67,91 @@
 <svelte:window on:wheel={handleWheel}/>
 
 <form on:submit|preventDefault>
-  <label><div>Szukaj</div>
-    <input type="text" bind:value={textToSearch} on:keyup={e => searchText(e.target.value)}>
+  <label class="search">
+    <div class="search-label">Szukaj: </div>
+    <input class="search-input" type="text" placeholder="Imię lub nazwisko" bind:value={textToSearch} on:keyup={e => searchText(e.target.value)}>
   </label>
 </form>
 
-{#if nameAscendingOrder}
-  <button 
-    on:click={() => { changeSort(0, 10, -1, 'name'); nameAscendingOrder = false; nameSortActiveLabel = true; surnameSortActiveLabel = false }} 
-    class={nameSortActiveLabel ? 'active': ''}
-  >▲ Sortuj po imieniu rosnąco</button>
-{/if}
-{#if !nameAscendingOrder}
-  <button 
-    on:click={() => { changeSort(0, 10, 1, 'name'); nameAscendingOrder = true; nameSortActiveLabel = true; surnameSortActiveLabel = false }} 
-    class={nameSortActiveLabel ? 'active': ''}
-  >▼ Sortuj po imieniu malejąco</button>
-{/if}
+<div class="sort">
+  {#if nameAscendingOrder}
+    <button class="{nameSortActiveLabel ? 'active': ''} name-sort-active-label"
+      on:click={() => { changeSort(0, 10, -1, 'name'); nameAscendingOrder = false; nameSortActiveLabel = true; surnameSortActiveLabel = false }} 
+    >▲ Sortuj po imieniu rosnąco</button>
+  {/if}
+  {#if !nameAscendingOrder}
+    <button class="{nameSortActiveLabel ? 'active': ''} name-sort-active-label"
+      on:click={() => { changeSort(0, 10, 1, 'name'); nameAscendingOrder = true; nameSortActiveLabel = true; surnameSortActiveLabel = false }} 
+    >▼ Sortuj po imieniu malejąco</button>
+  {/if}
 
-{#if surnameAscendingOrder}
-  <button 
-    on:click={() => { changeSort(0, 10, -1, 'surname'); surnameAscendingOrder = false; nameSortActiveLabel = false; surnameSortActiveLabel = true }} 
-    class={surnameSortActiveLabel ? 'active': ''}
-  >▲ Sortuj po nazwisku rosnąco</button>
-{/if}
-{#if !surnameAscendingOrder}
-  <button 
-    on:click={() => { changeSort(0, 10, 1, 'surname'); surnameAscendingOrder = true; nameSortActiveLabel = false; surnameSortActiveLabel = true }} 
-    class={surnameSortActiveLabel ? 'active': ''}
-  >▼ Sortuj po nazwisku malejąco</button>
-{/if}
+  {#if surnameAscendingOrder}
+    <button class="{surnameSortActiveLabel ? 'active': ''} surname-sort-active-label"
+      on:click={() => { changeSort(0, 10, -1, 'surname'); surnameAscendingOrder = false; nameSortActiveLabel = false; surnameSortActiveLabel = true }} 
+    >▲ Sortuj po nazwisku rosnąco</button>
+  {/if}
+  {#if !surnameAscendingOrder}
+    <button class="{surnameSortActiveLabel ? 'active': ''} surname-sort-active-label"
+      on:click={() => { changeSort(0, 10, 1, 'surname'); surnameAscendingOrder = true; nameSortActiveLabel = false; surnameSortActiveLabel = true }} 
+    >▼ Sortuj po nazwisku malejąco</button>
+  {/if}
+</div>
 
-{#each $usersStore as user, i}
-  <div>
-    {++i}: {JSON.stringify(user)}
-  </div>
-{/each}
-
+<div class="users">
+  {#each $usersStore as user, i}
+    <div class="user">
+      <div class="number">{++i}:</div>
+      <div class="name">{user.name}</div>
+      <div class="surname">{user.surname}</div>
+      <div class="user-type">{user.userType}</div>
+    </div>
+  {/each}
+</div>
 
 <style>
-  button {
-    opacity: 0.6
+  .search-input {
+    padding: 1rem;
+    margin: 1rem 0;
+    border: 1px solid #808080;
+  }
+  .name-sort-active-label, .surname-sort-active-label {
+    opacity: 0.4;
+    padding: 1rem;
+    margin: 1rem 0;
   }
   .active {
     opacity: 1
+  }
+  .users {
+    padding-bottom: 5rem;;
+  }
+
+  @media (min-width: 960px)  {
+    .search-label {
+      text-align: right;
+      align-self: center;
+    }
+
+    .user, .sort, .search {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      align-items: center;
+      gap: 1rem;
+      padding: 1rem;
+    }
+      .number {
+        grid-column: 1/2;
+        color: #808080
+      }
+      .name, .name-sort-active-label, .search-label {
+        grid-column: 2/6;
+      }
+      .surname, .surname-sort-active-label, .search-input {
+        grid-column: 6/10;
+      }
+      .user-type {
+        grid-column: 10/13;
+        color: #808080
+      }
   }
 </style>

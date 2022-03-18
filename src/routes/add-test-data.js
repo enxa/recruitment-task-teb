@@ -25,10 +25,10 @@ export const post = async e => {
     
     if (userType === 'Wykładowca') {
       user = {
-        name: `Imię:${uuidv4()}`,
-        surname: `Nazwisko:${uuidv4()}`,
-        email: `email:${uuidv4()}@teb.pl`,
-        password: `Hasło:${uuidv4()}`,
+        name: `${uuidv4()}`,
+        surname: `${uuidv4()}`,
+        email: `${uuidv4()}@teb.pl`,
+        password: `${uuidv4()}`,
         userType: `Wykładowca`,
         phone: `${phone}`,
         education: `Profesor`,
@@ -37,23 +37,23 @@ export const post = async e => {
 
     if (userType === 'Pracownik administracyjny') {
       user = {
-        name: `Imię:${uuidv4()}`,
-        surname: `Nazwisko:${uuidv4()}`,
-        email: `email:${uuidv4()}@teb.pl`,
-        password: `Hasło:${uuidv4()}`,
+        name: `${uuidv4()}`,
+        surname: `${uuidv4()}`,
+        email: `${uuidv4()}@teb.pl`,
+        password: `${uuidv4()}`,
         userType: `Pracownik administracyjny`,
         correspondenceAddress: {
-          voivodship: `Województwo:${uuidv4()}`, 
-          city: `Miasto:${uuidv4()}`,
+          voivodship: `${uuidv4()}`, 
+          city: `${uuidv4()}`,
           code: `${code}`, 
-          street: `Ulica:${uuidv4()}`,
+          street: `${uuidv4()}`,
           number: `${number}`
         },
         residenceAddress: {
-          voivodship: `Województwo:${uuidv4()}`, 
-          city: `Miasto:${uuidv4()}`,
+          voivodship: `${uuidv4()}`, 
+          city: `${uuidv4()}`,
           code: `${code}`, 
-          street: `Ulica:${uuidv4()}`,
+          street: `${uuidv4()}`,
           number: `${number}`
         }
       }
