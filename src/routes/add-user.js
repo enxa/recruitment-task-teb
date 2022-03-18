@@ -28,11 +28,3 @@ export const post = async e => {
     body
   }
 }
-
-export const get = e => {
-  return {
-    body: {
-      result: 'OK'
-    }
-  }
-}

@@ -70,7 +70,7 @@
       body: JSON.stringify(data),
     })
     let result = await response.json()
-    console.log('result', result)
+
     if (result.auth) {
       info = result.auth
     } else {
@@ -174,5 +174,6 @@
   <input type="submit" value="Dodaj użytkownika">
 </form>
 
-{info}
-{JSON.stringify($usersStore)}
+{#if info}
+  {info}
+{/if}
