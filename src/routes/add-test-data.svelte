@@ -30,11 +30,22 @@
   }
 </script>
 
-
 <form on:submit|preventDefault>
-  <label>
+  <label><div>Ilość danych testowych do wprowadzenia:</div>
     <input type="number" bind:value={testData}>
     <input type="submit" value="Dodaj dane testowe" on:click={post(testData)}>
-    <input type="submit" value="Usuń dane testowe" on:click={del(testData)}>
+    <input type="submit" value="Usuń wszystkie dane" on:click={del(testData)}>
   </label>
 </form>
+
+<style>
+  input {
+    display: block;
+    padding: 1rem;
+    margin: 1rem 0;
+    width: 30rem;
+  }
+    input[type="number"] {
+      border: 1px solid #808080;
+    }
+</style>

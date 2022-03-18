@@ -30,7 +30,6 @@
     street: '', 
     number: '' 
   }
-
   
   let resetForm = e => {
     name = ''
@@ -108,7 +107,7 @@
   }
 </script>
 
-<form on:submit|preventDefault={handleSubmit}>
+<form class="add-user" on:submit|preventDefault={handleSubmit}>
   <label><div>Imię</div>
     <input type="text" bind:value={name}>
   </label>
@@ -176,6 +175,42 @@
   <input type="submit" value="Dodaj użytkownika">
 </form>
 
-{#if info}
-  {info}
-{/if}
+<div class="info">
+  {#if info}
+    {info}
+  {/if}
+</div>
+
+<style>
+  input, select {
+    width: 20rem;
+    padding: 1rem;
+    margin: 1rem 0;
+    background: #eee;
+    width: 100%;
+  }
+  h6 {
+    font-size: 2rem;
+    padding: 3rem 0 1.5rem 0;
+    font-weight: 300;
+  }
+
+  input[type="submit"] {
+    margin: 1rem 0 5rem 0;
+  }
+
+  @media (min-width: 640px) {
+    input, select {
+      margin: 0;
+      width: 30rem;
+    }
+    label {
+      display: flex;
+      align-items: center;
+      padding: 1rem;
+    }
+      label > div {
+        width: 20rem;
+      }
+  }
+</style>
