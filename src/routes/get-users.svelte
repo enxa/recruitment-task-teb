@@ -31,7 +31,7 @@
       }
     })
     let result = await response.json()
-    usersStore.update(store => store = [ ...store, ...result])
+    if (result) usersStore.update(store => store = [ ...store, ...result])
   }
 
   let handleWheel = e => {
